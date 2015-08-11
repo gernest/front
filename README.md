@@ -1,4 +1,4 @@
-# front
+# front [![Build Status](https://travis-ci.org/gernest/front.svg)](https://travis-ci.org/gernest/front)
 
 extracts frontmatter from text files with ease.
 
