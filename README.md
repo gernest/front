@@ -22,7 +22,7 @@ now you can have your front matter saparated from its body by passing an `io.Rea
 
 Please see the tests formore details
 
-## License
+## Licence
 
-This project is under the MIT License. See the [LICENSE](LICENSE) file for the full license text.
+This project is under the MIT Licence. See the [LICENCE](LICENCE) file for the full license text.
 
