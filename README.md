@@ -2,11 +2,15 @@
 
 extracts frontmatter from text files with ease.
 
+## Installation
+
+	go get github.com/gernest/front
+
 ## How To use
 
 create a new `Matter` instance.
 
-	m:=NewMatter()
+	m:=front.NewMatter()
 
 register a frontmatter handler, this is any function which implements `FrontFunc` interface. For the moment front has `JSONHandler`` which handllers json frontmatter. If we register "+++" it means anything between +++ and the next +++  from the beginning of the file is interpreted as frontmatter.
 
