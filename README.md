@@ -1,6 +1,11 @@
-# front [![Build Status](https://travis-ci.org/gernest/front.svg)](https://travis-ci.org/gernest/front)
+# front [![Build Status](https://travis-ci.org/gernest/front.svg)](https://travis-ci.org/gernest/front) [![GoDoc](https://godoc.org/github.com/gernest/front?status.svg)](https://godoc.org/github.com/gernest/front)
 
 extracts frontmatter from text files with ease.
+
+## Features
+* Custom delimiters. You are free to register any delimiter of your choice. Provided its a three character string. e.g `+++`,  `$$$`,  `---`,  `%%%`
+
+* Custom Handlers. Anything that implements `HandlerFunc` can be used to decode the values from the frontmatter text, you can see the `JSONHandler` for how to implement one.
 
 ## Installation
 
@@ -8,21 +13,40 @@ extracts frontmatter from text files with ease.
 
 ## How To use
 
-create a new `Matter` instance.
+```go
+package main
 
-	m:=front.NewMatter()
+import (
+	"fmt"
+	"strings"
 
-register a frontmatter handler, this is any function which implements `FrontFunc` interface. For the moment front has `JSONHandler`` which handllers json frontmatter. If we register "+++" it means anything between +++ and the next +++  from the beginning of the file is interpreted as frontmatter.
+	"github.com/gernest/front"
+)
 
-	m.Handle("+++",front.JSONHandler)
-	
-now you can have your front matter saparated from its body by passing an `io.Reader` to the Parse method.
-	
-	// The variable front isof type map[string]interface{}
-	// it contains all the key value pairs defined in the frontmatter
-	//
-	// file is an io.Reader (the text imput you want to process)
-	front,body,err:=m.Parse(file)
+var txt = `
++++
+{
+	"title":"front"
+}
++++
+
+# Body
+Over my dead body
+`
+
+func main() {
+	m := front.NewMatter()
+	m.Handle("+++", front.JSONHandler)
+	f, body, err := m.Parse(strings.NewReader(txt))
+	if err != nil {
+		// Handle error here
+	}
+
+	fmt.Printf("The front matter is %v \n", f)
+	fmt.Println("The body is %s %n", body)
+}
+
+```
 
 Please see the tests formore details
 

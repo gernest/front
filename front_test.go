@@ -6,13 +6,6 @@ import (
 	"testing"
 )
 
-var files = []struct {
-	delim, file string
-}{
-	{"+++", "testdata/front/toml.md"},
-	{"---", "testdata/front/yml.md"},
-}
-
 func TestMatter(t *testing.T) {
 	bodyData, err := ioutil.ReadFile("testdata/front/body.md")
 	if err != nil {

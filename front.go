@@ -1,3 +1,4 @@
+// Package front is a frontmatter extraction library.
 package front
 
 import (
@@ -10,32 +11,35 @@ import (
 )
 
 var (
-	ErrIsEmpty      = errors.New("front: an empty file")
+	//ErrIsEmpty is an error indicating no front matter was found
+	ErrIsEmpty = errors.New("front: an empty file")
+
+	//ErrUnknownDelim is returned when the delimiters are not known by the
+	//FrontMatter implementation.
 	ErrUnknownDelim = errors.New("front: unknown delim")
 )
 
 type (
-	//FrontFunc is an interface for a function that process front matter text.
-	FrontFunc func(string) (map[string]interface{}, error)
-
-	//FrontMatter is the intrface for a frontmatter processing unit.
-	FrontMatter interface {
-		Handle(string, FrontFunc)
-		Parse(io.Reader) (front map[string]interface{}, body string, err error)
-	}
+	//HandlerFunc is an interface for a function that process front matter text.
+	HandlerFunc func(string) (map[string]interface{}, error)
 )
 
-//Matter is an implementation of the FrontMatter interface
+//Matter is all what matters here.
 type Matter struct {
-	handlers map[string]FrontFunc
+	handlers map[string]HandlerFunc
 }
 
+//NewMatter creates a new Matter instance
 func NewMatter() *Matter {
-	return &Matter{handlers: make(map[string]FrontFunc)}
+	return &Matter{handlers: make(map[string]HandlerFunc)}
 }
-func (m *Matter) Handle(delim string, fn FrontFunc) {
+
+//Handle registers a handler for the given frontmatter delimiter
+func (m *Matter) Handle(delim string, fn HandlerFunc) {
 	m.handlers[delim] = fn
 }
+
+// Parse parses the input and extract the frontmatter
 func (m *Matter) Parse(input io.Reader) (front map[string]interface{}, body string, err error) {
 	return m.parse(input)
 }
@@ -110,6 +114,8 @@ func dropSpace(d []byte) []byte {
 	return bytes.TrimSpace(d)
 }
 
+//JSONHandler implements HandlerFunc interface. It extracts front matter data from the given
+// string argument by interpreting it as a json string.
 func JSONHandler(front string) (map[string]interface{}, error) {
 	var rst interface{}
 	err := json.Unmarshal([]byte(front), &rst)
