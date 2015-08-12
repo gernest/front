@@ -4,8 +4,9 @@ extracts frontmatter from text files with ease.
 
 ## Features
 * Custom delimiters. You are free to register any delimiter of your choice. Provided its a three character string. e.g `+++`,  `$$$`,  `---`,  `%%%`
-
 * Custom Handlers. Anything that implements `HandlerFunc` can be used to decode the values from the frontmatter text, you can see the `JSONHandler` for how to implement one.
+* Support YAML frontmatter
+* Support JSON frontmatter.
 
 ## Installation
 

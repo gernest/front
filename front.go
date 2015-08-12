@@ -8,6 +8,8 @@ import (
 	"errors"
 	"io"
 	"strings"
+
+	"gopkg.in/yaml.v2"
 )
 
 var (
@@ -123,4 +125,14 @@ func JSONHandler(front string) (map[string]interface{}, error) {
 		return nil, err
 	}
 	return rst.(map[string]interface{}), nil
+}
+
+//YAMLHandler decodes ymal string into a go map[string]interface{}
+func YAMLHandler(front string) (map[string]interface{}, error) {
+	out := make(map[string]interface{})
+	err := yaml.Unmarshal([]byte(front), out)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }

@@ -28,3 +28,17 @@ func TestMatter(t *testing.T) {
 		t.Error("expected front matter to contain title got nil instead")
 	}
 }
+
+func TestYAMLHandler(t *testing.T) {
+	data, err := ioutil.ReadFile("testdata/sample.yml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	f, err := YAMLHandler(string(data))
+	if err != nil {
+		t.Errorf("handling yaml %v", err)
+	}
+	if _, ok := f["language"]; !ok {
+		t.Errorf("expected language got nil instead")
+	}
+}
