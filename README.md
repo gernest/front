@@ -1,4 +1,4 @@
-# front [![Build Status](https://travis-ci.org/gernest/front.svg)](https://travis-ci.org/gernest/front) [![GoDoc](https://godoc.org/github.com/gernest/front?status.svg)](https://godoc.org/github.com/gernest/front)
+# front [![Build Status](https://travis-ci.org/gernest/front.svg)](https://travis-ci.org/gernest/front) [![GoDoc](https://godoc.org/github.com/gernest/front?status.svg)](https://godoc.org/github.com/gernest/front)[![Coverage Status](https://coveralls.io/repos/gernest/front/badge.svg?branch=master&service=github)](https://coveralls.io/github/gernest/front?branch=master)
 
 extracts frontmatter from text files with ease.
 
