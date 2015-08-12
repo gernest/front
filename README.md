@@ -43,7 +43,7 @@ func main() {
 	}
 
 	fmt.Printf("The front matter is %v \n", f)
-	fmt.Println("The body is %s %n", body)
+	fmt.Println("The body is %s \n", body)
 }
 
 ```
