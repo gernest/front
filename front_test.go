@@ -17,7 +17,7 @@ func TestMatter(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	front, body, err := m.parse(bytes.NewReader(b))
+	front, body, err := m.Parse(bytes.NewReader(b))
 	if err != nil {
 		t.Error(err)
 	}
