@@ -69,7 +69,13 @@ func sniffDelim(input []byte) (string, error) {
 }
 
 func (m *Matter) splitFront(input io.Reader) (front, body string, err error) {
+	bufsize := 1024 * 1024
+	buf := make([]byte, bufsize)
+
 	s := bufio.NewScanner(input)
+	// Necessary so we can handle larger than default 4096b buffer
+	s.Buffer(buf, bufsize)
+
 	rst := make([]string, 2)
 	s.Split(m.split)
 	n := 0
