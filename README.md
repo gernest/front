@@ -12,7 +12,7 @@ extracts frontmatter from text files with ease.
 
 	go get github.com/gernest/front
 
-## How To use
+## How to use
 
 ```go
 package main
@@ -24,10 +24,9 @@ import (
 	"github.com/gernest/front"
 )
 
-var txt = `
-+++
+var txt = `+++
 {
-	"title":"front"
+    "title":"front"
 }
 +++
 
@@ -40,13 +39,12 @@ func main() {
 	m.Handle("+++", front.JSONHandler)
 	f, body, err := m.Parse(strings.NewReader(txt))
 	if err != nil {
-		// Handle error here
+		panic(err)
 	}
 
-	fmt.Printf("The front matter is %v \n", f)
-	fmt.Println("The body is %s \n", body)
+	fmt.Printf("The front matter is:\n%#v\n", f)
+	fmt.Printf("The body is:\n%q\n", body)
 }
-
 ```
 
 Please see the tests formore details
