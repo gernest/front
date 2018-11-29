@@ -42,3 +42,26 @@ func TestYAMLHandler(t *testing.T) {
 		t.Errorf("expected language got nil instead")
 	}
 }
+
+func TestMultipleDelimiters(t *testing.T) {
+	bodyData, err := ioutil.ReadFile("testdata/multi/body.md")
+	if err != nil {
+		t.Error(err)
+	}
+	m := NewMatter()
+	m.Handle("---", YAMLHandler)
+	b, err := ioutil.ReadFile("testdata/multi/yaml.md")
+	if err != nil {
+		t.Error(err)
+	}
+	front, body, err := m.Parse(bytes.NewReader(b))
+	if err != nil {
+		t.Error(err)
+	}
+	if body != string(bodyData) {
+		t.Errorf("expected %s got %s", string(bodyData), body)
+	}
+	if _, ok := front["test"]; !ok {
+		t.Error("expected front matter to contain test got nil instead")
+	}
+}
