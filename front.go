@@ -93,7 +93,7 @@ func (m *Matter) splitFront(input io.Reader) (front, body string, err error) {
 	return rst[0], rst[1], nil
 }
 
-//split implements bufio.SplitFunc for spliting fron matter from the body text.
+//split implements bufio.SplitFunc for spliting front matter from the body text.
 func (m *Matter) split(data []byte, atEOF bool) (advance int, token []byte, err error) {
 	if atEOF && len(data) == 0 {
 		return 0, nil, nil
