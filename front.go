@@ -52,6 +52,8 @@ func (m *Matter) parse(input io.Reader) (front map[string]interface{}, body stri
 	f, body, err := m.splitFront(input)
 	if err != nil {
 		return nil, "", err
+	} else if len(f) < 3 {
+		return map[string]interface{}{}, body, nil
 	}
 	h := m.handlers[f[:3]]
 	front, err = h(getFront(f))
